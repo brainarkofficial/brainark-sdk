@@ -1,0 +1,126 @@
+# ─── BrainArk master .gitignore ─────────────────────────────────────────────
+# NEVER commit secrets. If a file here is ever needed in a repo, the answer is
+# an example file with placeholder values (e.g. .env.example), not the real one.
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.env
+.env.keys
+*.secret
+*secret*.json
+secrets/
+credentials*
+*credentials*.json
+.npmrc
+.netrc
+.pgpass
+auth.json
+
+# Private keys, seeds, mnemonics, wallets
+*.key
+*.pem
+*.p12
+*.pfx
+*.der
+*.priv
+*private*key*
+*privkey*
+*mnemonic*
+*seed-phrase*
+*seedphrase*
+*recovery-phrase*
+*recovery_phrase*
+keystore/
+keystores/
+*.keystore
+UTC--*
+vault.enc
+vault*.enc
+master.key
+gpg.pass
+*.gpg
+*.asc
+id_rsa*
+id_ed25519*
+ssh-keys/
+*_admin
+*_admin.pub
+
+# Validator / node keys (Besu)
+key
+key.pub
+**/data/key
+validators/*/key*
+nodekey
+*validator*key*
+static-nodes.json
+permissions_config.toml
+
+# Android / app signing
+*.jks
+keystore.properties
+local.properties
+google-services.json
+GoogleService-Info.plist
+*.mobileprovision
+
+# Cloud credentials
+.aws/
+.gcp/
+*service-account*.json
+gcloud*.json
+.azure/
+terraform.tfstate*
+*.tfvars
+
+# Databases and runtime data (may hold user data or hashes)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+data/
+dump.rdb
+*.sql.gz
+backups/
+*.bak
+*.bak-*
+*.backup*
+*.orig
+*.pre-*
+
+# Build output, deps, caches, logs
+node_modules/
+dist/
+dist-*/
+build/
+out/
+.next/
+coverage/
+test-results/
+playwright-report/
+artifacts/
+cache/
+typechain-types/
+.gradle/
+android/app/build/
+*.apk
+*.aab
+*.zip
+*.tgz
+*.log
+logs/
+*.pid
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Local test chains (generated; hold well-known test keys)
+test-chain*.json
+.test-chain*

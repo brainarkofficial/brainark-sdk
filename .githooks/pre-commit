@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# BrainArk pre-commit guard. Enable once per clone:  git config core.hooksPath .githooks
+set -euo pipefail
+# 1. Files that must never be committed, even if force-added past .gitignore.
+blocked=$(git diff --cached --name-only --diff-filter=ACMR | grep -iE '(^|/)(\.env(\..*)?|\.env\.keys|keystore\.properties|local\.properties|vault.*\.enc|master\.key|gpg\.pass|nodekey|key|key\.pub)$|\.(jks|keystore|pem|p12|pfx|key|db|sqlite3?)$|(mnemonic|seed-?phrase|recovery-?phrase|private-?key)[^/.]*(\.(txt|json|csv|md|log|bak|yml|yaml))?$' | grep -vE '\.example$' || true)
+if [ -n "$blocked" ]; then
+  echo "✗ BLOCKED — these files must never be committed:"; echo "$blocked" | sed 's/^/    /'
+  echo "  Remove them from the commit (git restore --staged <file>). Use an *.example file with placeholders instead."
+  exit 1
+fi
+# 2. Secret scan of exactly what is being committed.
+if ! command -v gitleaks >/dev/null; then echo "✗ gitleaks is not installed — install it before committing (https://github.com/gitleaks/gitleaks)"; exit 1; fi
+gitleaks git --pre-commit --staged --redact --no-banner --config .gitleaks.toml || { echo "✗ gitleaks found a possible secret. Commit refused."; exit 1; }
