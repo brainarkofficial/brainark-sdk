@@ -1,0 +1,14 @@
+{
+  "name": "@brainark/sdk",
+  "version": "0.1.0",
+  "description": "Read helpers, chain definition, contract addresses and ABIs for the BrainArk chain (chain ID 1236).",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": { ".": "./src/index.js", "./abis/*": "./abis/*" },
+  "files": ["src", "abis", "README.md", "LICENSE"],
+  "scripts": { "test": "node test/smoke.mjs" },
+  "engines": { "node": ">=20.10" },
+  "license": "MIT",
+  "peerDependencies": { "viem": "^2.21.0" },
+  "devDependencies": { "viem": "2.44.4" }
+}
